@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- Launch the parking controller on the real robot. Launches stop_detector -->
+  <!-- Edit this to launch your safety controller you implemented in Lab 3! -->
+
+
+  <node pkg="stop_detector" name="stop_detector" exec="stop_detector" output="screen">
+  </node>
+
+
+</launch>
