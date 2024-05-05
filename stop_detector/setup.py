@@ -2,7 +2,7 @@ import os
 import glob
 from setuptools import setup
 
-package_name = 'visual_servoing'
+package_name = 'stop_detector'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     zip_safe=True,
     maintainer='Jospeh',
     maintainer_email='jrales@mit.edu',
-    description='Visual Servoing ROS2 package',
+    description='Stop Detector ROS2 package',
     license='Apache License, Version 2.0',
     tests_require=['pytest'],
     entry_points={
