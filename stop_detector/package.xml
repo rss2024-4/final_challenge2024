@@ -3,9 +3,9 @@
 <package format="3">
   <name>stop_detector</name>
   <version>0.0.0</version>
-  <description>Stop Detector Package</description>
-  <maintainer email="jrales@mit.edu">Jospeh</maintainer>
-  <license>TODO</license>
+  <description>TODO: Package description</description>
+  <maintainer email="hpk328@gmail.com">racecar</maintainer>
+  <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
