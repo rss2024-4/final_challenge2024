@@ -40,7 +40,7 @@ class StopController(Node):
         self.theta_low = -math.pi / 4
         self.theta_hi = math.pi / 4
         self.delta_r = 0.25
-        self.threshold = 5
+        self.threshold = 3
         
         if self.sim_test:
             self.cur_velocity = 2.0
