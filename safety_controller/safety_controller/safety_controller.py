@@ -5,13 +5,14 @@ from rclpy.node import Node
 
 from sensor_msgs.msg import LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped
+from std_msgs.msg import Bool
 
-class StopController(Node):
+class SafetyController(Node):
 
     def __init__(self):
-        super().__init__('stop_controller')
+        super().__init__('safety_controller')
         self.declare_parameter("scan_topic", "default")
-        self.sim_test = False
+        self.sim_test = True
 
         self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
         self.subscriber = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.scan_callback, 10)
@@ -20,13 +21,13 @@ class StopController(Node):
                                                          self.handle_drive_msg,
                                                          10
                                                          )
-        self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
+        # self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
 
         if self.sim_test:
             self.subscriber = self.create_subscription(LaserScan,'/scan', self.scan_callback, 10)
             self.publisher = self.create_publisher(AckermannDriveStamped, '/drive', 10)
-
-        # self.stop_pub = self.create_publisher()
+            
+        self.stop_pub = self.create_publisher(Bool, 'safety_stop_bool', 10)
 
         self.L = .4
         self.W = .3
@@ -44,7 +45,7 @@ class StopController(Node):
         
         if self.sim_test:
             self.cur_velocity = 3.5
-            self.cur_angle = -0.0
+            self.cur_angle = -0.1
             
             cmd = AckermannDriveStamped()
             cmd.header.stamp = self.get_clock().now().to_msg()
@@ -54,7 +55,6 @@ class StopController(Node):
             self.publisher.publish(cmd)
     
         self.should_stop = False
-        # self.publisher_ = self.create_publisher(Float32, 'stop', 10)
 
     def handle_drive_msg(self, msg):
         self.cur_angle = msg.drive.steering_angle
@@ -98,35 +98,39 @@ class StopController(Node):
         self.get_logger().info(str(count))
                     
         self.should_stop = (count >= self.threshold)
+        
+        msg = Bool()
+        msg.data = self.should_stop
+        self.stop_pub.publish(msg)
             
-        if self.should_stop:
-            cmd = AckermannDriveStamped()
-            cmd.header.stamp = self.get_clock().now().to_msg()
-            cmd.header.frame_id = 'map'
-            cmd.drive.steering_angle = 0.0
-            cmd.drive.speed = 0.0
-            self.publisher.publish(cmd)
-            self.get_logger().info('SAFETY CONTROLLER STOP!')
-        else:
-            cmd = AckermannDriveStamped()
-            cmd.header.stamp = self.get_clock().now().to_msg()
-            cmd.header.frame_id = 'map'
-            cmd.drive.steering_angle = self.cur_angle
-            cmd.drive.speed = self.cur_velocity
-            self.publisher.publish(cmd)
+        # if self.should_stop:
+            # cmd = AckermannDriveStamped()
+            # cmd.header.stamp = self.get_clock().now().to_msg()
+            # cmd.header.frame_id = 'map'
+            # cmd.drive.steering_angle = 0.0
+            # cmd.drive.speed = 0.0
+            # self.publisher.publish(cmd)
+            # self.get_logger().info('SAFETY CONTROLLER STOP!')
+        # else:
+            # cmd = AckermannDriveStamped()
+            # cmd.header.stamp = self.get_clock().now().to_msg()
+            # cmd.header.frame_id = 'map'
+            # cmd.drive.steering_angle = self.cur_angle
+            # cmd.drive.speed = self.cur_velocity
+            # self.publisher.publish(cmd)
             
 
 def main(args=None):
     rclpy.init(args=args)
 
-    stop_controller = StopController()
+    safety_controller = SafetyController()
 
-    rclpy.spin(stop_controller)
+    rclpy.spin(safety_controller)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    stop_controller.destroy_node()
+    safety_controller.destroy_node()
     rclpy.shutdown()
 
 

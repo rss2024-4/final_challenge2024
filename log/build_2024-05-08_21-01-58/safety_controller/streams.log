@@ -1,0 +1,17 @@
+[4.922s] Invoking command in '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/build --no-deps install_data
+[6.517s] running develop
+[7.303s] running egg_info
+[7.305s] writing safety_controller.egg-info/PKG-INFO
+[7.308s] writing dependency_links to safety_controller.egg-info/dependency_links.txt
+[7.324s] writing entry points to safety_controller.egg-info/entry_points.txt
+[7.329s] writing requirements to safety_controller.egg-info/requires.txt
+[7.334s] writing top-level names to safety_controller.egg-info/top_level.txt
+[7.467s] reading manifest file 'safety_controller.egg-info/SOURCES.txt'
+[7.493s] writing manifest file 'safety_controller.egg-info/SOURCES.txt'
+[7.722s] running build_ext
+[7.725s] Creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages/safety-controller.egg-link (link to .)
+[7.747s] Installing safety_controller script to /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/safety_controller
+[7.778s] 
+[7.787s] Installed /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller
+[7.793s] running install_data
+[7.896s] Invoked command in '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller' returned '0': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/build --no-deps install_data

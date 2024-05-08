@@ -1,0 +1,16 @@
+running develop
+running egg_info
+writing state_machine.egg-info/PKG-INFO
+writing dependency_links to state_machine.egg-info/dependency_links.txt
+writing entry points to state_machine.egg-info/entry_points.txt
+writing requirements to state_machine.egg-info/requires.txt
+writing top-level names to state_machine.egg-info/top_level.txt
+reading manifest file 'state_machine.egg-info/SOURCES.txt'
+writing manifest file 'state_machine.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages/state-machine.egg-link (link to .)
+Installing state_machine script to /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/state_machine
+
+Installed /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller
+running install_data
+error: can't copy 'resource/state_machine': doesn't exist or not a regular file

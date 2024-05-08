@@ -1,0 +1,25 @@
+[4.612s] Invoking command in '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/build --no-deps install_data
+[6.148s] running develop
+[6.933s] running egg_info
+[6.936s] creating state_machine.egg-info
+[6.939s] writing state_machine.egg-info/PKG-INFO
+[6.941s] writing dependency_links to state_machine.egg-info/dependency_links.txt
+[6.943s] writing entry points to state_machine.egg-info/entry_points.txt
+[6.962s] writing requirements to state_machine.egg-info/requires.txt
+[6.971s] writing top-level names to state_machine.egg-info/top_level.txt
+[6.982s] writing manifest file 'state_machine.egg-info/SOURCES.txt'
+[7.134s] reading manifest file 'state_machine.egg-info/SOURCES.txt'
+[7.152s] writing manifest file 'state_machine.egg-info/SOURCES.txt'
+[7.426s] running build_ext
+[7.430s] Creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages/site.py
+[7.456s] Creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages/state-machine.egg-link (link to .)
+[7.473s] Installing state_machine script to /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/state_machine
+[7.489s] 
+[7.505s] Installed /home/racecar/racecar_ws/src/final_challenge2024/build/state_machine
+[7.528s] running install_data
+[7.533s] creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index
+[7.538s] creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index
+[7.550s] creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index/packages
+[7.578s] copying resource/state_machine -> /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index/packages
+[7.584s] copying package.xml -> /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/state_machine
+[8.256s] Invoked command in '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine' returned '0': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/build --no-deps install_data
