@@ -6,7 +6,7 @@ from cv_bridge import CvBridge, CvBridgeError
 
 import numpy as np
 from sensor_msgs.msg import Image
-from detector import StopSignDetector
+from stop_detector import StopSignDetector
 # from sift_sign import StopSignDetector
 
 from ackermann_msgs.msg import AckermannDriveStamped
