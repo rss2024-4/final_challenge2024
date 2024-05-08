@@ -27,7 +27,7 @@ class SafetyController(Node):
             self.subscriber = self.create_subscription(LaserScan,'/scan', self.scan_callback, 10)
             self.publisher = self.create_publisher(AckermannDriveStamped, '/drive', 10)
             
-        self.stop_pub = self.create_publisher(Bool, 'safety_stop_bool', 10)
+        self.stop_pub = self.create_publisher(Bool, '/safety_stop', 10)
 
         self.L = .4
         self.W = .3

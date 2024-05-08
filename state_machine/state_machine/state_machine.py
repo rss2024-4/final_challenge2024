@@ -1,59 +1,68 @@
 import rclpy
-import math
 import numpy as np
 from rclpy.node import Node
 
-from std_msgs.msg import Float32
+from geometry_msgs.msg import PoseArray
 from std_msgs.msg import Bool
 from ackermann_msgs.msg import AckermannDriveStamped
 
+STOPPED = 0
+SAFETY_STOPPED = 1
+DRIVING = 2
 
-class StateMachine(Node):
-    
-    states = set()
-    stops = [False, False, False]
-    
+class StateMachine(Node):    
     def __init__(self):
         super().__init__('state_machine')
         
-        self.stop_sub = self.create_subscription(Bool, 'safety_stop_bool', self.safety_stop_callback, 10) # Publish stop topic
-        self.drive_pub = self.create_publisher(AckermannDriveStamped, '/drive', 10) # TODO: change to car drive
-        self.uturnpub = self.create_publisher(Bool, 'uturn_bool', 10) # Publish U-turn
-        self.uturnsub = self.create_subscription(Bool, 'uturn_bool', self.uturn_callback, 10) # Publish stop topic
+        self.drive_pub = self.create_publisher(AckermannDriveStamped, "/drive", 10) # TODO: change to car drive
+
+        self.goal_points_sub = self.create_subscription(PoseArray, "/shell_points", self.goal_points_cb)
+
+        self.stop_detector_sub = self.create_subscription(Bool, "/stop_detection", self.stop_detector_cb, 1)
+        self.safety_stop_sub = self.create_subscription(Bool, "/safety_stop", self.safety_stop_cb, 1)
+
+        self.follower_sub = self.create_subscription(AckermannDriveStamped, "/follower_drive", self.follower_cb, 1)        
         
-        self.timer = self.create_timer(0.01, self.run)
-        
-    def run(self):
-        self.get_logger().info(str(self.states) + " | " + str(self.stops))
-        
-        if any(self.stops):
-            self.publishDriveCmd(0, 0) # stop
-            return
-        
-        if False: # check for uturn
-            msg = Bool()
-            msg.data = True
-            self.uturnpub.publish(msg)
-                    
-            
-    def safety_stop_callback(self, msg):
-        self.stop_callback(msg.data, 0)
-        
-    def stop_callback(self, stop, ind):
-        self.stops[ind] = stop
-            
-    def uturn_callback(self, msg):
-        if not msg.data:
-            self.states.remove('uturn')
-        
-    def publishDriveCmd(self, vel, angle):
+        self.timer = self.create_timer(0.01, self.timer_cb)
+        self.state = STOPPED
+        self.follower_drive_cmd = self.create_drive_msg(0, 0)
+        self.goal_points = []
+
+    def timer_cb(self):
+        if self.state == STOPPED:
+            self.drive_pub.publish(self.create_drive_msg(0, 0))
+        elif self.state == SAFETY_STOPPED:
+            start_safety_stop = self.get_clock().now().to_msg().sec
+            while self.get_clock().now().to_msg().sec - start_safety_stop < 1:
+                self.drive_pub.publish(self.create_drive_msg(0, 0))
+            start_backup = self.get_clock().now().to_msg().sec
+            while self.get_clock().now().to_msg().sec - start_backup < 1:
+                self.drive_pub.publish(self.create_drive_msg(-1.5, 0))
+        elif self.state == DRIVING:
+            self.drive_pub.publish(self.follower_drive_cmd)
+
+    def stop_detector_cb(self, msg):
+        if msg.data and self.state != SAFETY_STOPPED:
+            self.state == STOPPED
+
+    def safety_stop_cb(self, msg):
+        if msg.data:
+            self.state == SAFETY_STOPPED
+
+    def goal_points_cb(self, msg):
+        self.goal_points = [(pose.position.x, pose.position.y) for pose in msg.poses]
+
+    def follower_cb(self, msg):
+        self.follower_drive_cmd = msg
+    
+    def create_drive_msg(self, vel, angle):
         cmd = AckermannDriveStamped()
         cmd.header.stamp = self.get_clock().now().to_msg()
         cmd.header.frame_id = 'map'
         cmd.drive.steering_angle = float(angle)
         cmd.drive.speed = float(vel)
-        self.drive_pub.publish(cmd)
-        
+        return cmd
+
 def main(args=None):
     rclpy.init(args=args)
 
