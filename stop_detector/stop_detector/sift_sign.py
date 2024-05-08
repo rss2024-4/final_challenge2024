@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from PIL import Image, ImageDraw
 
-class StopSignDetector:
+class StopSignSIFT:
 
   def __init__(self, threshold=0.5):
     # self.model = torch.hub.load('ultralytics/yolov5', 'yolov5n', pretrained=True)
@@ -156,4 +156,4 @@ def read_image(path):
 #     return [coord.values[0] for coord in coords]
 
 if __name__=="__main__":
-    detector = StopSignDetector()
+    detector = StopSignSIFT()

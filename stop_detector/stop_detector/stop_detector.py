@@ -6,8 +6,8 @@ from cv_bridge import CvBridge, CvBridgeError
 
 import numpy as np
 from sensor_msgs.msg import Image
-from detector import StopSignDetector
-# from sift_sign import StopSignDetector
+from stop_detector import StopSignDetector
+# from sift_sign import StopSignSIFT
 
 from ackermann_msgs.msg import AckermannDriveStamped
 
@@ -19,6 +19,7 @@ class SignDetector(Node):
     def __init__(self):
         super().__init__("stop_detector")
         self.detector = StopSignDetector()
+        # self.detector = StopSignSIFT()
 
         # calling safety rn, may public seperate topic later
         self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
