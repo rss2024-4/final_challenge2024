@@ -11,7 +11,7 @@ class StopController(Node):
     def __init__(self):
         super().__init__('stop_controller')
         self.declare_parameter("scan_topic", "default")
-        self.sim_test = False
+        self.sim_test = True
 
         self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
         self.subscriber = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.scan_callback, 10)
@@ -35,7 +35,7 @@ class StopController(Node):
         self.delta = (self.W + 0.1)/2
         self.cur_angle = 0
         self.cur_velocity = 0.0
-        self.stop_dist = 1.0
+        self.decel = 3
         
         self.theta_low = -math.pi / 4
         self.theta_hi = math.pi / 4
@@ -43,8 +43,8 @@ class StopController(Node):
         self.threshold = 3
         
         if self.sim_test:
-            self.cur_velocity = 3.5
-            self.cur_angle = -0.0
+            self.cur_velocity = 2.0
+            self.cur_angle = -0.05
             
             cmd = AckermannDriveStamped()
             cmd.header.stamp = self.get_clock().now().to_msg()
@@ -62,7 +62,7 @@ class StopController(Node):
 
     def scan_callback(self, msg):
         
-        stopping_d = max(1.0, math.sqrt(self.cur_velocity) * 0.5)
+        stopping_d = self.L + self.cur_velocity**2/(2*self.decel)
         
         i_low = math.floor((self.theta_low - msg.angle_min) / msg.angle_increment)
         i_hi = math.ceil((self.theta_hi - msg.angle_min) / msg.angle_increment)
@@ -75,7 +75,7 @@ class StopController(Node):
             
             point = (dist_p * math.cos(angle_p) + self.L, dist_p * math.sin(angle_p))
             
-            # self.get_logger().info("\n" + str(angle_p) + " " + str(dist_p))
+            self.get_logger().info(str(angle_p) + " " + str(dist_p))
             
             if self.cur_angle == 0:
                 if point[0] <= stopping_d and abs(point[1] < self.delta_r):
@@ -85,17 +85,11 @@ class StopController(Node):
                 center = (0, R * math.copysign(1, self.cur_angle))
                 
                 point_R = math.sqrt((point[0] - center[0]) ** 2 + (point[1] - center[1]) ** 2)
-                point_angle = math.atan2(abs(point[0] - center[0]), abs(point[1] - center[1]))
-                point_arcl = abs(point_angle * R)
-                
-                # self.get_logger().info(f"%s, %s, %s, %s" % (R, point_R, point_angle, point_arcl))
-                
-                R = abs(R)
+                point_angle = math.atan2(point[0] - center[0], point[1] - center[1])
+                point_arcl = point_angle * R
                 
                 if R - self.delta_r <= point_R <= R + self.delta_r and stopping_d >= point_arcl >= 0:
                     count += 1
-                    
-        self.get_logger().info(str(count))
                     
         self.should_stop = (count >= self.threshold)
             

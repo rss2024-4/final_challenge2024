@@ -1,0 +1,216 @@
+[2.832s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'safety_controller']
+[2.833s] DEBUG:colcon:Parsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7ffffeb10d30>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=['safety_controller'], packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=8, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7ffffeb10d30>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7ffffe8191f0>)
+[2.968s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[2.969s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[2.969s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[2.969s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[2.969s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[2.970s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[2.970s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/racecar/racecar_ws/src/final_challenge2024'
+[2.971s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[2.972s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[2.972s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[2.973s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[2.975s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[2.975s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[2.975s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[2.977s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[2.977s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.993s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.993s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.993s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.994s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.994s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.995s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.995s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.995s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.996s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.997s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.997s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.998s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.998s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.998s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.999s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['ignore', 'ignore_ament_install']
+[3.000s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ignore'
+[3.000s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ignore_ament_install'
+[3.000s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['colcon_pkg']
+[3.000s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'colcon_pkg'
+[3.001s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['colcon_meta']
+[3.001s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'colcon_meta'
+[3.001s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['ros']
+[3.001s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ros'
+[3.002s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['cmake', 'python']
+[3.002s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'cmake'
+[3.002s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'python'
+[3.003s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['python_setup_py']
+[3.003s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'python_setup_py'
+[3.004s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extensions ['ignore', 'ignore_ament_install']
+[3.004s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extension 'ignore'
+[3.004s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extension 'ignore_ament_install'
+[3.006s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extensions ['colcon_pkg']
+[3.007s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extension 'colcon_pkg'
+[3.008s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extensions ['colcon_meta']
+[3.009s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extension 'colcon_meta'
+[3.009s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extensions ['ros']
+[3.009s] Level 1:colcon.colcon_core.package_identification:_identify(point_publisher) by extension 'ros'
+[3.018s] DEBUG:colcon.colcon_core.package_identification:Package 'point_publisher' with type 'ros.ament_python' and name 'point_publisher'
+[3.019s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['ignore', 'ignore_ament_install']
+[3.019s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'ignore'
+[3.020s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'ignore_ament_install'
+[3.020s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['colcon_pkg']
+[3.020s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'colcon_pkg'
+[3.021s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['colcon_meta']
+[3.021s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'colcon_meta'
+[3.021s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['ros']
+[3.021s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'ros'
+[3.022s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['cmake', 'python']
+[3.022s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'cmake'
+[3.022s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'python'
+[3.023s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extensions ['python_setup_py']
+[3.023s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images) by extension 'python_setup_py'
+[3.024s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['ignore', 'ignore_ament_install']
+[3.024s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'ignore'
+[3.025s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'ignore_ament_install'
+[3.025s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['colcon_pkg']
+[3.025s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'colcon_pkg'
+[3.025s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['colcon_meta']
+[3.026s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'colcon_meta'
+[3.026s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['ros']
+[3.026s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'ros'
+[3.027s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['cmake', 'python']
+[3.027s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'cmake'
+[3.027s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'python'
+[3.027s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extensions ['python_setup_py']
+[3.027s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_1) by extension 'python_setup_py'
+[3.029s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['ignore', 'ignore_ament_install']
+[3.029s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'ignore'
+[3.029s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'ignore_ament_install'
+[3.030s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['colcon_pkg']
+[3.030s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'colcon_pkg'
+[3.030s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['colcon_meta']
+[3.030s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'colcon_meta'
+[3.031s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['ros']
+[3.031s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'ros'
+[3.031s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['cmake', 'python']
+[3.031s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'cmake'
+[3.032s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'python'
+[3.032s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extensions ['python_setup_py']
+[3.032s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_3) by extension 'python_setup_py'
+[3.033s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['ignore', 'ignore_ament_install']
+[3.033s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'ignore'
+[3.034s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'ignore_ament_install'
+[3.034s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['colcon_pkg']
+[3.034s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'colcon_pkg'
+[3.035s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['colcon_meta']
+[3.035s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'colcon_meta'
+[3.035s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['ros']
+[3.037s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'ros'
+[3.039s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['cmake', 'python']
+[3.039s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'cmake'
+[3.040s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'python'
+[3.040s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extensions ['python_setup_py']
+[3.040s] Level 1:colcon.colcon_core.package_identification:_identify(racetrack_images/lane_6) by extension 'python_setup_py'
+[3.041s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extensions ['ignore', 'ignore_ament_install']
+[3.041s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extension 'ignore'
+[3.042s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extension 'ignore_ament_install'
+[3.042s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extensions ['colcon_pkg']
+[3.042s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extension 'colcon_pkg'
+[3.042s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extensions ['colcon_meta']
+[3.043s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extension 'colcon_meta'
+[3.043s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extensions ['ros']
+[3.043s] Level 1:colcon.colcon_core.package_identification:_identify(safety_controller) by extension 'ros'
+[3.044s] DEBUG:colcon.colcon_core.package_identification:Package 'safety_controller' with type 'ros.ament_python' and name 'safety_controller'
+[3.045s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['ignore', 'ignore_ament_install']
+[3.045s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'ignore'
+[3.046s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'ignore_ament_install'
+[3.046s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['colcon_pkg']
+[3.046s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'colcon_pkg'
+[3.046s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['colcon_meta']
+[3.047s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'colcon_meta'
+[3.047s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['ros']
+[3.047s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'ros'
+[3.048s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['cmake', 'python']
+[3.048s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'cmake'
+[3.048s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'python'
+[3.048s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extensions ['python_setup_py']
+[3.049s] Level 1:colcon.colcon_core.package_identification:_identify(state_machine) by extension 'python_setup_py'
+[3.050s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extensions ['ignore', 'ignore_ament_install']
+[3.050s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extension 'ignore'
+[3.050s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extension 'ignore_ament_install'
+[3.051s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extensions ['colcon_pkg']
+[3.051s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extension 'colcon_pkg'
+[3.051s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extensions ['colcon_meta']
+[3.051s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extension 'colcon_meta'
+[3.051s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extensions ['ros']
+[3.052s] Level 1:colcon.colcon_core.package_identification:_identify(stop_detector) by extension 'ros'
+[3.053s] DEBUG:colcon.colcon_core.package_identification:Package 'stop_detector' with type 'ros.ament_python' and name 'stop_detector'
+[3.053s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[3.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[3.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[3.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[3.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[3.219s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'point_publisher' in 'point_publisher'
+[3.219s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stop_detector' in 'stop_detector'
+[3.267s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_args' from command line to 'None'
+[3.267s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_target' from command line to 'None'
+[3.268s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[3.268s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[3.268s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_clean_first' from command line to 'False'
+[3.268s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'cmake_force_configure' from command line to 'False'
+[3.268s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'ament_cmake_args' from command line to 'None'
+[3.269s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[3.269s] Level 5:colcon.colcon_core.verb:set package 'safety_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[3.269s] DEBUG:colcon.colcon_core.verb:Building package 'safety_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller', 'merge_install': False, 'path': '/home/racecar/racecar_ws/src/final_challenge2024/safety_controller', 'symlink_install': False, 'test_result_base': None}
+[3.317s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[3.370s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[3.372s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/racecar/racecar_ws/src/final_challenge2024/safety_controller' with build type 'ament_python'
+[3.373s] Level 1:colcon.colcon_core.shell:create_environment_hook('safety_controller', 'ament_prefix_path')
+[3.422s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[3.424s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/ament_prefix_path.ps1'
+[3.430s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/ament_prefix_path.dsv'
+[3.432s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/ament_prefix_path.sh'
+[3.480s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.481s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.248s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/racecar/racecar_ws/src/final_challenge2024/safety_controller'
+[4.300s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.301s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[5.322s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/racecar/racecar_ws/src/final_challenge2024/safety_controller': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/safety_controller build --build-base /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/build install --record /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/install.log --install-scripts $base/lib/safety_controller --single-version-externally-managed
+[6.013s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/racecar/racecar_ws/src/final_challenge2024/safety_controller' returned '0': PYTHONPATH=/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/safety_controller build --build-base /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/build install --record /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/install.log --install-scripts $base/lib/safety_controller --single-version-externally-managed
+[6.068s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller' for CMake module files
+[6.071s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller' for CMake config files
+[6.077s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib'
+[6.080s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/bin'
+[6.082s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/pkgconfig/safety_controller.pc'
+[6.083s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages'
+[6.083s] Level 1:colcon.colcon_core.shell:create_environment_hook('safety_controller', 'pythonpath')
+[6.129s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/pythonpath.ps1'
+[6.130s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/pythonpath.dsv'
+[6.132s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/hook/pythonpath.sh'
+[6.134s] Level 1:colcon.colcon_core.environment:checking '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/bin'
+[6.134s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(safety_controller)
+[6.191s] INFO:colcon.colcon_core.shell:Creating package script '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/package.ps1'
+[6.193s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/package.dsv'
+[6.195s] INFO:colcon.colcon_core.shell:Creating package script '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/package.sh'
+[6.197s] INFO:colcon.colcon_core.shell:Creating package script '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/package.bash'
+[6.199s] INFO:colcon.colcon_core.shell:Creating package script '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller/package.zsh'
+[6.201s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/colcon-core/packages/safety_controller)
+[6.203s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[6.203s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[6.204s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[6.204s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[6.275s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[6.276s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[6.276s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[6.277s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[6.279s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.NotSupported: Unable to autolaunch a dbus-daemon without a $DISPLAY for X11
+[6.279s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[6.329s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/racecar/racecar_ws/src/final_challenge2024/install/local_setup.ps1'
+[6.332s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/racecar/racecar_ws/src/final_challenge2024/install/_local_setup_util_ps1.py'
+[6.339s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/racecar/racecar_ws/src/final_challenge2024/install/setup.ps1'
+[6.393s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/racecar/racecar_ws/src/final_challenge2024/install/local_setup.sh'
+[6.395s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/racecar/racecar_ws/src/final_challenge2024/install/_local_setup_util_sh.py'
+[6.403s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/racecar/racecar_ws/src/final_challenge2024/install/setup.sh'
+[6.457s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/racecar/racecar_ws/src/final_challenge2024/install/local_setup.bash'
+[6.459s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/racecar/racecar_ws/src/final_challenge2024/install/setup.bash'
+[6.515s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/racecar/racecar_ws/src/final_challenge2024/install/local_setup.zsh'
+[6.516s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/racecar/racecar_ws/src/final_challenge2024/install/setup.zsh'
