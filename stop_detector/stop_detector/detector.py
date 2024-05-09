@@ -68,6 +68,11 @@ def is_stop_sign(df, label='stop sign', threshold=THRESHOLD):
     confidences = df[df['confidence'] > threshold]
     return len(confidences[confidences['name'] == label]) != 0 # If a stop sign has been detected
 
+# will implemented later
+def is_traffic_light(df, label='traffic light', threshold=THRESHOLD):
+    confidences = df[df['confidence'] > threshold]
+    return len(confidences[confidences['name'] == label]) != 0 # If a traffic light has been detected
+
 def get_bounding_box(df, label='stop sign', threshold=THRESHOLD):
     if not is_stop_sign(df, label=label, threshold=threshold): return (0, 0, 0, 0)
     confidences = df[df['confidence'] > threshold]

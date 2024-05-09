@@ -6,7 +6,7 @@ from cv_bridge import CvBridge, CvBridgeError
 
 import numpy as np
 from sensor_msgs.msg import Image
-from stop_detector import StopSignDetector
+from detector import StopSignDetector
 # from sift_sign import StopSignSIFT
 
 from ackermann_msgs.msg import AckermannDriveStamped
@@ -49,6 +49,7 @@ class SignDetector(Node):
             cmd.drive.steering_angle = .001
             cmd.drive.speed = 2.0
             self.publisher.publish(cmd)
+            self.get_logger().info('vroom vroom')
 
             if is_sign:
                 area = (box[2]-box[0])*(box[3]-box[0])
