@@ -13,7 +13,7 @@ class UTurn(Node):
     def __init__(self):
         super().__init__("parking_controller")
         
-        self.drive_pub = self.create_publisher(AckermannDriveStamped, "/vesc/low_level/navigation", 1)
+        self.drive_pub = self.create_publisher(AckermannDriveStamped, "/drive", 1)
         self.create_subscription(Bool, "/safety_stop", self.safety_cb, 1)
         self.create_subscription(String, "/uturn", self.start_cb, 1)
         self.create_timer(0.05, self.loop)
