@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'stop_detector = stop_detector.stop_detector:main'
+            'stop_detector = stop_detector.stop_detector:main',
+            'detector = stop_detector.detector:main'
         ],
     },
 )

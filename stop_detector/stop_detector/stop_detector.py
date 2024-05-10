@@ -43,12 +43,6 @@ class SignDetector(Node):
         is_sign, box = self.detector.predict(image)
 
         if self.state == DRIVING:
-            cmd = AckermannDriveStamped()
-            cmd.header.stamp = self.get_clock().now().to_msg()
-            cmd.header.frame_id = 'map'
-            cmd.drive.steering_angle = .001
-            cmd.drive.speed = 2.0
-            self.publisher.publish(cmd)
             self.get_logger().info('vroom vroom')
 
             if is_sign:
@@ -59,12 +53,6 @@ class SignDetector(Node):
                     self.start_time = self.get_time()
             
         elif self.state == WAITING:
-            cmd = AckermannDriveStamped()
-            cmd.header.stamp = self.get_clock().now().to_msg()
-            cmd.header.frame_id = 'map'
-            cmd.drive.steering_angle = 0.0
-            cmd.drive.speed = 0.0
-            self.publisher.publish(cmd)
             self.get_logger().info('STOP SIGN STOP!')
 
             if(self.get_time() > self.start_time + self.WAITTIME):
@@ -72,6 +60,7 @@ class SignDetector(Node):
         
         elif self.state == GOING_PAST:
             # can also just be until not is_sign
+            self.get_logger().info('still vroom vroom')
             if(self.get_time() > self.start_time + 2*self.WAITTIME):
                 self.state = DRIVING
                 
