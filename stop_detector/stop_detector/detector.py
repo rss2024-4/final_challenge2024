@@ -47,18 +47,18 @@ def read_image(path):
     rgb_im = cv2.cvtColor(cv2.imread(str(path)), cv2.COLOR_BGR2RGB)
     return rgb_im
 
-def draw_rect(im, xmin, ymin, xmax, ymax):
-    box = xmin, ymin, xmax, ymax
-    img = Image.fromarray(im)
-    imgd = ImageDraw.Draw(img)
-    imgd.rectangle(box, outline='red')
-    return img
+# def draw_rect(im, xmin, ymin, xmax, ymax):
+#     box = xmin, ymin, xmax, ymax
+#     img = Image.fromarray(im)
+#     imgd = ImageDraw.Draw(img)
+#     imgd.rectangle(box, outline='red')
+#     return img
 
-def draw_box(im, box):
-    img = Image.fromarray(im)
-    imgd = ImageDraw.Draw(img)
-    imgd.rectangle(box, outline='red')
-    return img
+# def draw_box(im, box):
+#     img = Image.fromarray(im)
+#     imgd = ImageDraw.Draw(img)
+#     imgd.rectangle(box, outline='red')
+#     return img
 
 # Detecting Utils
 
