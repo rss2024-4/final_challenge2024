@@ -30,7 +30,7 @@ class SignDetector(Node):
         
         self.subscriber = self.create_subscription(Image, "/zed/zed_node/rgb/image_rect_color", self.callback, 5)
         self.stop_pub = self.create_publisher(Bool, '/stop_detection', 10) # true to stop
-        self.timer = self.create_timer(.001, self.timer_cb)
+        # self.timer = self.create_timer(.001, self.timer_cb)
         self.bridge = CvBridge()
 
         self.get_logger().info("Sign & Light Detector Initialized")
@@ -59,7 +59,7 @@ class SignDetector(Node):
         is_sign, sign_box, is_light, light_box = self.detector.predict(image)
 
         if self.state == DRIVING:
-            self.get_logger().info('vroom vroom')
+            # self.get_logger().info('vroom vroom')
             self.publish_bool(False)
 
             if is_sign:
@@ -81,7 +81,7 @@ class SignDetector(Node):
             
         elif self.state == WAITING:
             self.publish_bool(True)
-            self.get_logger().info('WAIT WAIT WAITING')
+            # self.get_logger().info('WAIT WAIT WAITING')
 
             if(self.get_time() > self.start_time + self.WAITTIME):
                 self.state = GOING_PAST

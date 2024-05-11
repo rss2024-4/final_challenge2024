@@ -20,8 +20,8 @@ class StateMachine(Node):
      
     def __init__(self):
         super().__init__('state_machine')
-        
-        self.drive_pub = self.create_publisher(AckermannDriveStamped, "/drive", 10) # TODO: change to car drive
+        d = "/vesc/low_level/input/navigation"
+        self.drive_pub = self.create_publisher(AckermannDriveStamped, d, 10) # TODO: change to car drive
 
         self.goal_points_sub = self.create_subscription(PoseArray, "/shell_points", self.goal_points_cb, 1)
 
@@ -39,9 +39,11 @@ class StateMachine(Node):
         
         # self.get_logger().info(str(sum(self.safety_last_stops)))
         
-        if sum(self.safety_last_stops) > 0.5 * self.safety_track_num:
+        #if sum(self.safety_last_stops) > 0.5 * self.safety_track_num:
+        if False:
             self.drive_pub.publish(self.create_drive_msg(-1.5, -0.1))
-        elif any(self.stop_array):
+        #elif any(self.stop_array):
+        elif False:
             self.drive_pub.publish(self.create_drive_msg(0, 0))
         else:
             self.drive_pub.publish(self.follower_drive_cmd) # ACTUAL

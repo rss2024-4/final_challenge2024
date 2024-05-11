@@ -15,7 +15,7 @@ class SafetyController(Node):
         self.sim_test = False
 
         self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
-        self.subscriber = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.scan_callback, 10)
+        self.subscriber = self.create_subscription(LaserScan, "/scan", self.scan_callback, 10)
         self.drive_output_sub = self.create_subscription(AckermannDriveStamped,
                                                          "/vesc/high_level/ackermann_cmd_mux/output",
                                                          self.handle_drive_msg,
