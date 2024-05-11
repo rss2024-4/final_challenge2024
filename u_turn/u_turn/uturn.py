@@ -26,6 +26,7 @@ class UTurn(Node):
         self.start_backing_up = None
         self.backing_up = False
         self.last_safety_msg = False
+        self.start_turning = 0.0
 
         self.get_logger().info("Started")
 
@@ -34,11 +35,18 @@ class UTurn(Node):
         if self.state == IDLE:
             return 
         elif self.state == TURNING:
-            self.drive_pub.publish(self.create_drive_msg(1.5, 100))
+            if self.get_time() - self.start_turning < 1.5:
+                self.drive_pub.publish(self.create_drive_msg(1.5, 100))
+            msg = String()
+            msg.data = "done"
+            self.done_pub.publish(msg)
+            self.state = IDLE
         elif self.state == BACKING_UP:
-            if self.get_time() - self.start_backing_up() < 1.0: 
+            if self.get_time() - self.start_backing_up < 1.0: 
                 self.drive_pub.publish(self.create_drive_msg(-1.5, -.15))
-            self.done_pub.publish("done")
+            msg = String()
+            msg.data = "done"
+            self.done_pub.publish(msg)
             self.state = IDLE
 
     def safety_cb(self, msg):
@@ -49,6 +57,7 @@ class UTurn(Node):
 
     def start_cb(self, msg):
         if msg.data == "start":
+            self.start_turning = self.get_time()
             self.state = TURNING
 
     def create_drive_msg(self, vel, angle):
