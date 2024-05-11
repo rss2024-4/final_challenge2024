@@ -119,20 +119,57 @@ def read_image(path):
     rgb_im = cv2.cvtColor(cv2.imread(str(path)), cv2.COLOR_BGR2RGB)
     return rgb_im
 
+def display_image(img):
+    cv2.imshow("hi", img)
+
 # Detecting Utils
 
 THRESHOLD = 0.7
 
-def is_stop_sign(df, label='stop sign', threshold=THRESHOLD):
+def is_stop_sign(df, label='traffic light', threshold=THRESHOLD):
     confidences = df[df['confidence'] > threshold]
     return len(confidences[confidences['name'] == label]) != 0 # If a stop sign has been detected
 
-def get_bounding_box(df, label='stop sign', threshold=THRESHOLD):
+def get_bounding_box(df, label='traffic light', threshold=THRESHOLD):
     if not is_stop_sign(df, label=label, threshold=threshold): return (0, 0, 0, 0)
     confidences = df[df['confidence'] > threshold]
     stop_sign = confidences[confidences['name'] == label].head(1)
     coords = stop_sign.xmin, stop_sign.ymin, stop_sign.xmax, stop_sign.ymax
     return [coord.values[0] for coord in coords]
+
+def crop_to_bounding(img, bounding_box):
+    minx, miny, maxx, maxy = bounding_box
+    return img[miny:maxy, minx:maxx]
+
+# splits image in half horizontally
+def split_img(img):
+    height = img.shape[0]
+
+    height_cutoff = height // 2
+    s1 = img[:height_cutoff,:]
+    s2 = img[height_cutoff:,:]
+
+    return s1, s2
+
+# returns the ratio of red in the img
+def check_red(img):
+    red = [255, 0, 0]
+    diff = 10
+
+    # 'shades' of red to find; loaded in BGR
+    boundaries = [([red[2], red[1], red[0]-diff],
+           [red[2]+diff, red[1]+diff, red[0]])]
+    
+    for (lower, upper) in boundaries:
+        lower = np.array(lower, dtype=np.uint8)
+        upper = np.array(upper, dtype=np.uint8)
+
+        mask = cv2.inRange(img, lower, upper)
+
+        ratio_red = cv2.countNonZero(mask)/(img.size/3)
+
+        return np.round(ratio_red, 2)
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -141,4 +178,20 @@ def main(args=None):
     rclpy.shutdown()
 
 if __name__=="__main__":
-    main()
+    # main()
+
+    detector = StopSignDetector()
+    
+    img = read_image('test_images/red_light.jpg')
+    cv2.imshow("og", img)
+
+    is_light, bb = detector.predict(img)
+
+    cropped = crop_to_bounding()
+    cv2.imshow("cropped", cropped)
+
+    split = split_img(cropped)[0]
+    cv2.imshow("top half", split)
+
+    percentage = check_red(split)
+    print(percentage)
