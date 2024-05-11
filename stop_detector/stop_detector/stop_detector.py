@@ -67,7 +67,7 @@ class SignDetector(Node):
                 area = (light_box[2]-light_box[0])*(light_box[3]-light_box[1])
                 self.get_logger().info(f'{area=}')
                 if area > self.light_threshold:
-                    if not check_green(image, is_light, light_box):
+                    if not check_green(image, is_light, light_box, self):
                         self.state = TRAFFIC_STOP
             
         elif self.state == WAITING:
@@ -85,7 +85,7 @@ class SignDetector(Node):
                 self.state = DRIVING
         elif self.state == TRAFFIC_STOP:
             self.get_logger().info('RED LIGHT RED LIGHT')
-            if check_green(image, is_light, light_box):
+            if check_green(image, is_light, light_box, self):
                 self.state = DRIVING # maybe should be waiting
 
 
@@ -156,24 +156,31 @@ def split_img(img):
 
 # returns the ratio of red in the img
 def green_percentage(img, node):
-    green = [0, 225, 150]
-    diff = 20
+    # green = [0, 225, 150]
+    # diff = 20
 
     # 'shades' of red to find; loaded in BGR
-    boundaries = [([green[2], green[1]-diff, green[0]-diff],
-           [green[2]+diff, green[1]+diff, green[0]+diff])]
+    # boundaries = [([green[2], green[1]-diff, green[0]-diff],
+    #        [green[2]+diff, green[1]+diff, green[0]+diff])]
     
-    for (lower, upper) in boundaries:
-        lower = np.array(lower, dtype=np.uint8)
-        upper = np.array(upper, dtype=np.uint8)
 
-        mask = cv2.inRange(img, lower, upper)
+    
+    # for (lower, upper) in boundaries:
+    #     lower = np.array(lower, dtype=np.uint8)
+    #     upper = np.array(upper, dtype=np.uint8)
 
-        ratio_green = cv2.countNonZero(mask)/(img.size/3)
+    lower = np.array([60, 85, 0])
+    upper = np.array([90, 255, 255])
 
-        greenness = np.round(ratio_green, 2)
-        node.get_logger().info(f"{greenness=}")
-        return greenness
+    hsvImage = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    mask = cv2.inRange(hsvImage, lower, upper)
+
+    ratio_green = cv2.countNonZero(mask)/(img.size/3)
+
+    greenness = np.round(ratio_green, 2)
+    node.get_logger().info(f"{greenness=}")
+    return greenness
 
 def check_green(img, is_light, light_box, node):
     greenness_threshold = .35
