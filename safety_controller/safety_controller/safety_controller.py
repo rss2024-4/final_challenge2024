@@ -40,7 +40,7 @@ class SafetyController(Node):
         
         self.theta_low = -math.pi / 4
         self.theta_hi = math.pi / 4
-        self.delta_r = 0.25
+        self.delta_r = 0.3
         self.threshold = 3
         
         if self.sim_test:
@@ -95,7 +95,7 @@ class SafetyController(Node):
                 if R - self.delta_r <= point_R <= R + self.delta_r and stopping_d >= point_arcl >= 0:
                     count += 1
                     
-        self.get_logger().info(str(count))
+        # self.get_logger().info(str(count))
                     
         self.should_stop = (count >= self.threshold)
         

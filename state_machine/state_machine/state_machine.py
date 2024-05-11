@@ -13,6 +13,10 @@ DRIVING = 2
 class StateMachine(Node):   
     
     stop_array = [False, False]
+    
+    safety_track_num = 50
+    safety_last_stops = [0] * safety_track_num
+    safety_last_stop_ind = 0
      
     def __init__(self):
         super().__init__('state_machine')
@@ -32,19 +36,16 @@ class StateMachine(Node):
         self.goal_points = []
 
     def timer_cb(self):
-        if any(self.stop_array):
-        # if self.state == STOPPED:
+        
+        # self.get_logger().info(str(sum(self.safety_last_stops)))
+        
+        if sum(self.safety_last_stops) > 0.5 * self.safety_track_num:
+            self.drive_pub.publish(self.create_drive_msg(-1.5, -0.1))
+        elif any(self.stop_array):
             self.drive_pub.publish(self.create_drive_msg(0, 0))
-        # elif self.state == SAFETY_STOPPED:
-        #     start_safety_stop = self.get_clock().now().to_msg().sec
-        #     while self.get_clock().now().to_msg().sec - start_safety_stop < 1:
-        #         self.drive_pub.publish(self.create_drive_msg(0, 0))
-        #     start_backup = self.get_clock().now().to_msg().sec
-        #     while self.get_clock().now().to_msg().sec - start_backup < 1:
-        #         self.drive_pub.publish(self.create_drive_msg(-1.5, 0))
-        # elif self.state == DRIVING:
         else:
-            self.drive_pub.publish(self.follower_drive_cmd)
+            self.drive_pub.publish(self.follower_drive_cmd) # ACTUAL
+            # self.drive_pub.publish(self.create_drive_msg(2, 0.1)) # FOR TESTING
 
     def stop_detector_cb(self, msg):
         self.stop_array[STOPPED] = msg.data
@@ -53,6 +54,9 @@ class StateMachine(Node):
 
     def safety_stop_cb(self, msg):
         self.stop_array[SAFETY_STOPPED] = msg.data
+        
+        self.safety_last_stops[self.safety_last_stop_ind] = int(msg.data)
+        self.safety_last_stop_ind = (self.safety_last_stop_ind + 1) % self.safety_track_num
         # if msg.data:
             # self.state == SAFETY_STOPPED
 
