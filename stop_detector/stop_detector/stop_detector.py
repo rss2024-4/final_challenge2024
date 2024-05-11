@@ -33,42 +33,51 @@ class SignDetector(Node):
 
         # change to tune
         self.THRESHOLD = 100 # pixels^2
-        self.WAITTIME = 3 # seconds
+        self.WAITTIME = 15 # seconds?
 
-        self.timer = self.create_timer(.001, self.timer_cb)
+        # self.timer = self.create_timer(.001, self.timer_cb)
         self.state = DRIVING
 
+        self.start_time = 0
+        self.vroom = True
+
     def callback(self, img_msg):
-        # Process image with CV Bridge
-        image = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
 
-        is_sign, box = self.detector.predict(image)
+        try:
+            # Process image with CV Bridge
+            image = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
 
-        if self.state == DRIVING:
-            self.get_logger().info('vroom vroom')
+            is_sign, box = self.detector.predict(image)
 
-            if is_sign:
-                area = (box[2]-box[0])*(box[3]-box[0])
-                self.get_logger().info(f'{area=}')
-                if area > self.THRESHOLD:
-                    self.state = WAITING
-                    self.start_time = self.get_time()
+            if self.state == DRIVING:
+                self.get_logger().info('vroom vroom')
+
+                if is_sign:
+                    self.get_logger().info('i see the sign')
+
+                    area = (box[2]-box[0])*(box[3]-box[1])
+                    self.get_logger().info(f'{area=}')
+                    # if area > self.THRESHOLD:
+                    #     self.state = WAITING
+                    #     self.start_time = self.get_time()
+                
+            elif self.state == WAITING:
+                self.get_logger().info('STOP SIGN STOP!')
+
+                if(self.get_time() > self.start_time + self.WAITTIME):
+                    self.state = GOING_PAST
             
-        elif self.state == WAITING:
-            self.get_logger().info('STOP SIGN STOP!')
-
-            if(self.get_time() > self.start_time + self.WAITTIME):
-                self.state = GOING_PAST
-        
-        elif self.state == GOING_PAST:
-            # can also just be until not is_sign
-            self.get_logger().info('still vroom vroom')
-            if(self.get_time() > self.start_time + 2*self.WAITTIME):
-                self.state = DRIVING
+            elif self.state == GOING_PAST:
+                # can also just be until not is_sign
+                self.get_logger().info('still vroom vroom')
+                if(self.get_time() > self.start_time + 2*self.WAITTIME):
+                    self.state = DRIVING
+        except:
+            self.get_logger().info('error')
                 
         
     def get_time(self):
-        return self.get_clock().now().to_msg().sec + (self.get_clock().now().to_msg().nanosec * (10**-9))
+        return int(self.get_clock().now().to_msg().sec) # + (self.get_clock().now().to_msg().nanosec * (10**-9))
 
 
 class StopSignDetector:
@@ -120,8 +129,6 @@ def get_bounding_box(df, label='stop sign', threshold=THRESHOLD):
     stop_sign = confidences[confidences['name'] == label].head(1)
     coords = stop_sign.xmin, stop_sign.ymin, stop_sign.xmax, stop_sign.ymax
     return [coord.values[0] for coord in coords]
-
-
 
 def main(args=None):
     rclpy.init(args=args)
