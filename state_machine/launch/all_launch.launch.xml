@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="state_machine" exec="state_machine" name="state_machine"/>
+    <node pkg="stop_detector" exec="stop_detector" name="stop_detector"/>
+    <node pkg="safety_controller" exec="safety_controller" name="safety_controller"/>
+</launch>
