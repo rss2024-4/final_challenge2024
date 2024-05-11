@@ -152,6 +152,7 @@ def read_image(path):
 
 def crop_to_bounding(img, bounding_box):
     minx, miny, maxx, maxy = [int(x) for x in bounding_box]
+    minx, miny, maxx, maxy = [int(x) for x in bounding_box]
     return img[miny:maxy, minx:maxx]
 
 # splits image in half horizontally
@@ -170,14 +171,21 @@ def red_percentage(img, node):
     diff = 15
 
     # 'shades' of red to find; loaded in BGR
-    boundaries = [([red[2], red[1], red[0]-diff],
-           [red[2]+diff, red[1]+diff, red[0]])]
+    # boundaries = [([green[2], green[1]-diff, green[0]-diff],
+    #        [green[2]+diff, green[1]+diff, green[0]+diff])]
     
-    for (lower, upper) in boundaries:
-        lower = np.array(lower, dtype=np.uint8)
-        upper = np.array(upper, dtype=np.uint8)
 
-        mask = cv2.inRange(img, lower, upper)
+    
+    # for (lower, upper) in boundaries:
+    #     lower = np.array(lower, dtype=np.uint8)
+    #     upper = np.array(upper, dtype=np.uint8)
+
+    lower = np.array([60, 85, 0])
+    upper = np.array([90, 255, 255])
+
+    hsvImage = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    mask = cv2.inRange(hsvImage, lower, upper)
 
         ratio_red = cv2.countNonZero(mask)/(img.size/3)
         redness = np.round(ratio_red, 2)

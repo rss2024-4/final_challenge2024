@@ -1,0 +1,138 @@
+[0.000000] (-) TimerEvent: {}
+[0.002420] (-) JobUnselected: {'identifier': 'point_publisher'}
+[0.003450] (-) JobUnselected: {'identifier': 'stop_detector'}
+[0.004348] (-) JobUnselected: {'identifier': 'u_turn'}
+[0.004955] (safety_controller) JobQueued: {'identifier': 'safety_controller', 'dependencies': OrderedDict()}
+[0.005353] (state_machine) JobQueued: {'identifier': 'state_machine', 'dependencies': OrderedDict()}
+[0.005563] (safety_controller) JobStarted: {'identifier': 'safety_controller'}
+[0.098761] (-) TimerEvent: {}
+[0.201189] (-) TimerEvent: {}
+[0.304805] (-) TimerEvent: {}
+[0.407069] (-) TimerEvent: {}
+[0.441322] (state_machine) JobStarted: {'identifier': 'state_machine'}
+[0.508444] (-) TimerEvent: {}
+[0.611099] (-) TimerEvent: {}
+[0.713835] (-) TimerEvent: {}
+[0.822449] (-) TimerEvent: {}
+[0.924042] (-) TimerEvent: {}
+[1.025885] (-) TimerEvent: {}
+[1.126971] (-) TimerEvent: {}
+[1.230821] (-) TimerEvent: {}
+[1.335007] (-) TimerEvent: {}
+[1.435726] (-) TimerEvent: {}
+[1.537297] (-) TimerEvent: {}
+[1.638999] (-) TimerEvent: {}
+[1.741746] (-) TimerEvent: {}
+[1.845152] (-) TimerEvent: {}
+[1.947235] (-) TimerEvent: {}
+[2.049000] (-) TimerEvent: {}
+[2.150897] (-) TimerEvent: {}
+[2.253837] (-) TimerEvent: {}
+[2.357822] (-) TimerEvent: {}
+[2.459415] (-) TimerEvent: {}
+[2.561603] (-) TimerEvent: {}
+[2.665111] (-) TimerEvent: {}
+[2.767029] (-) TimerEvent: {}
+[2.870910] (-) TimerEvent: {}
+[2.971910] (-) TimerEvent: {}
+[3.072928] (-) TimerEvent: {}
+[3.173952] (-) TimerEvent: {}
+[3.277878] (-) TimerEvent: {}
+[3.382955] (-) TimerEvent: {}
+[3.487382] (-) TimerEvent: {}
+[3.591285] (-) TimerEvent: {}
+[3.710142] (-) TimerEvent: {}
+[3.812186] (-) TimerEvent: {}
+[3.916898] (-) TimerEvent: {}
+[4.018865] (-) TimerEvent: {}
+[4.123437] (-) TimerEvent: {}
+[4.224896] (-) TimerEvent: {}
+[4.270854] (safety_controller) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'develop', '--editable', '--build-directory', '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/build', '--no-deps', 'install_data'], 'cwd': '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller', 'env': {'PYTHONIOENCODING': 'utf-8', 'HOSTNAME': '6c212dcd643e', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/racecar/racecar_ws/install/vs_msgs/lib:/home/racecar/racecar_ws/install/custom_msgs/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/home/racecar', 'OLDPWD': '/home/racecar/racecar_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/home/racecar/racecar_ws/src/final_challenge2024/install:/home/sim_ws/install:/home/racecar/racecar_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'en_US.UTF-8', 'AMENT_PREFIX_PATH': '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller:/home/racecar/racecar_ws/install/wall_follower:/home/racecar/racecar_ws/install/safety_controller:/home/racecar/racecar_ws/install/ros_exercises:/home/racecar/racecar_ws/install/path_planning:/home/racecar/racecar_ws/install/localization:/home/racecar/racecar_ws/install/custom_msgs:/home/sim_ws/install/racecar_simulator:/opt/ros/foxy', 'SIM_WS': '/home/sim_ws', 'PWD': '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller', 'PYTHONPATH': '/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/wall_follower/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/vs_msgs/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/safety_controller:/home/racecar/racecar_ws/install/safety_controller/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/ros_exercises/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/path_planning:/home/racecar/racecar_ws/install/path_planning/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/localization:/home/racecar/racecar_ws/install/localization/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/custom_msgs/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'NO_VNC_VERSION': '1.4.0', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/racecar/racecar_ws/install/vs_msgs:/home/racecar/racecar_ws/install/custom_msgs:/home/sim_ws/install/racecar_simulator'}, 'shell': False}
+[4.332085] (-) TimerEvent: {}
+[4.403477] (state_machine) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'develop', '--editable', '--build-directory', '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/build', '--no-deps', 'install_data'], 'cwd': '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine', 'env': {'PYTHONIOENCODING': 'utf-8', 'HOSTNAME': '6c212dcd643e', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/racecar/racecar_ws/install/vs_msgs/lib:/home/racecar/racecar_ws/install/custom_msgs/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/home/racecar', 'OLDPWD': '/home/racecar/racecar_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/home/racecar/racecar_ws/src/final_challenge2024/install:/home/sim_ws/install:/home/racecar/racecar_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'en_US.UTF-8', 'AMENT_PREFIX_PATH': '/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller:/home/racecar/racecar_ws/install/wall_follower:/home/racecar/racecar_ws/install/safety_controller:/home/racecar/racecar_ws/install/ros_exercises:/home/racecar/racecar_ws/install/path_planning:/home/racecar/racecar_ws/install/localization:/home/racecar/racecar_ws/install/custom_msgs:/home/sim_ws/install/racecar_simulator:/opt/ros/foxy', 'SIM_WS': '/home/sim_ws', 'PWD': '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine', 'PYTHONPATH': '/home/racecar/racecar_ws/src/final_challenge2024/build/state_machine/prefix_override:/home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages:/home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller:/home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/wall_follower/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/vs_msgs/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/safety_controller:/home/racecar/racecar_ws/install/safety_controller/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/ros_exercises/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/path_planning:/home/racecar/racecar_ws/install/path_planning/lib/python3.8/site-packages:/home/racecar/racecar_ws/build/localization:/home/racecar/racecar_ws/install/localization/lib/python3.8/site-packages:/home/racecar/racecar_ws/install/custom_msgs/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'NO_VNC_VERSION': '1.4.0', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/racecar/racecar_ws/install/vs_msgs:/home/racecar/racecar_ws/install/custom_msgs:/home/sim_ws/install/racecar_simulator'}, 'shell': False}
+[4.433309] (-) TimerEvent: {}
+[4.535950] (-) TimerEvent: {}
+[4.638004] (-) TimerEvent: {}
+[4.745860] (-) TimerEvent: {}
+[4.851324] (-) TimerEvent: {}
+[4.957803] (-) TimerEvent: {}
+[5.061958] (-) TimerEvent: {}
+[5.163929] (-) TimerEvent: {}
+[5.265993] (-) TimerEvent: {}
+[5.369298] (-) TimerEvent: {}
+[5.470900] (-) TimerEvent: {}
+[5.574798] (-) TimerEvent: {}
+[5.633617] (safety_controller) StdoutLine: {'line': b'running develop\n'}
+[5.688403] (-) TimerEvent: {}
+[5.691924] (state_machine) StdoutLine: {'line': b'running develop\n'}
+[5.789055] (-) TimerEvent: {}
+[5.892878] (-) TimerEvent: {}
+[5.998941] (-) TimerEvent: {}
+[6.101302] (-) TimerEvent: {}
+[6.158896] (safety_controller) StdoutLine: {'line': b'running egg_info\n'}
+[6.161128] (safety_controller) StdoutLine: {'line': b'creating safety_controller.egg-info\n'}
+[6.163078] (safety_controller) StdoutLine: {'line': b'writing safety_controller.egg-info/PKG-INFO\n'}
+[6.165848] (safety_controller) StdoutLine: {'line': b'writing dependency_links to safety_controller.egg-info/dependency_links.txt\n'}
+[6.168337] (safety_controller) StdoutLine: {'line': b'writing entry points to safety_controller.egg-info/entry_points.txt\n'}
+[6.171785] (safety_controller) StdoutLine: {'line': b'writing requirements to safety_controller.egg-info/requires.txt\n'}
+[6.174760] (safety_controller) StdoutLine: {'line': b'writing top-level names to safety_controller.egg-info/top_level.txt\n'}
+[6.186011] (safety_controller) StdoutLine: {'line': b"writing manifest file 'safety_controller.egg-info/SOURCES.txt'\n"}
+[6.195831] (state_machine) StdoutLine: {'line': b'running egg_info\n'}
+[6.198072] (state_machine) StdoutLine: {'line': b'creating state_machine.egg-info\n'}
+[6.200503] (state_machine) StdoutLine: {'line': b'writing state_machine.egg-info/PKG-INFO\n'}
+[6.202271] (-) TimerEvent: {}
+[6.203371] (state_machine) StdoutLine: {'line': b'writing dependency_links to state_machine.egg-info/dependency_links.txt\n'}
+[6.206072] (state_machine) StdoutLine: {'line': b'writing entry points to state_machine.egg-info/entry_points.txt\n'}
+[6.209437] (state_machine) StdoutLine: {'line': b'writing requirements to state_machine.egg-info/requires.txt\n'}
+[6.215561] (state_machine) StdoutLine: {'line': b'writing top-level names to state_machine.egg-info/top_level.txt\n'}
+[6.228680] (state_machine) StdoutLine: {'line': b"writing manifest file 'state_machine.egg-info/SOURCES.txt'\n"}
+[6.276316] (safety_controller) StdoutLine: {'line': b"reading manifest file 'safety_controller.egg-info/SOURCES.txt'\n"}
+[6.300392] (safety_controller) StdoutLine: {'line': b"writing manifest file 'safety_controller.egg-info/SOURCES.txt'\n"}
+[6.304974] (-) TimerEvent: {}
+[6.352244] (state_machine) StdoutLine: {'line': b"reading manifest file 'state_machine.egg-info/SOURCES.txt'\n"}
+[6.362356] (state_machine) StdoutLine: {'line': b"writing manifest file 'state_machine.egg-info/SOURCES.txt'\n"}
+[6.407950] (-) TimerEvent: {}
+[6.476920] (safety_controller) StdoutLine: {'line': b'running build_ext\n'}
+[6.481894] (safety_controller) StdoutLine: {'line': b'Creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages/site.py\n'}
+[6.508969] (-) TimerEvent: {}
+[6.517238] (safety_controller) StdoutLine: {'line': b'Creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/python3.8/site-packages/safety-controller.egg-link (link to .)\n'}
+[6.533147] (safety_controller) StdoutLine: {'line': b'Installing safety_controller script to /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/lib/safety_controller\n'}
+[6.540919] (state_machine) StdoutLine: {'line': b'running build_ext\n'}
+[6.547895] (state_machine) StdoutLine: {'line': b'Creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages/site.py\n'}
+[6.552977] (safety_controller) StdoutLine: {'line': b'\n'}
+[6.556272] (safety_controller) StdoutLine: {'line': b'Installed /home/racecar/racecar_ws/src/final_challenge2024/build/safety_controller\n'}
+[6.559541] (safety_controller) StdoutLine: {'line': b'running install_data\n'}
+[6.562467] (safety_controller) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/ament_index\n'}
+[6.574103] (safety_controller) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/ament_index/resource_index\n'}
+[6.579539] (safety_controller) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/ament_index/resource_index/packages\n'}
+[6.583076] (safety_controller) StdoutLine: {'line': b'copying resource/safety_controller -> /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/ament_index/resource_index/packages\n'}
+[6.585437] (safety_controller) StdoutLine: {'line': b'copying package.xml -> /home/racecar/racecar_ws/src/final_challenge2024/install/safety_controller/share/safety_controller\n'}
+[6.587977] (state_machine) StdoutLine: {'line': b'Creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/python3.8/site-packages/state-machine.egg-link (link to .)\n'}
+[6.592274] (state_machine) StdoutLine: {'line': b'Installing state_machine script to /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/lib/state_machine\n'}
+[6.606244] (state_machine) StdoutLine: {'line': b'\n'}
+[6.609370] (-) TimerEvent: {}
+[6.610612] (state_machine) StdoutLine: {'line': b'Installed /home/racecar/racecar_ws/src/final_challenge2024/build/state_machine\n'}
+[6.619354] (state_machine) StdoutLine: {'line': b'running install_data\n'}
+[6.623447] (state_machine) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index\n'}
+[6.627373] (state_machine) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index\n'}
+[6.640162] (state_machine) StdoutLine: {'line': b'creating /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index/packages\n'}
+[6.652957] (state_machine) StdoutLine: {'line': b'copying resource/state_machine -> /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/ament_index/resource_index/packages\n'}
+[6.673683] (state_machine) StdoutLine: {'line': b'copying package.xml -> /home/racecar/racecar_ws/src/final_challenge2024/install/state_machine/share/state_machine\n'}
+[6.682169] (safety_controller) CommandEnded: {'returncode': 0}
+[6.711174] (-) TimerEvent: {}
+[6.834797] (-) TimerEvent: {}
+[6.962167] (-) TimerEvent: {}
+[7.069923] (-) TimerEvent: {}
+[7.172526] (-) TimerEvent: {}
+[7.274836] (-) TimerEvent: {}
+[7.378981] (-) TimerEvent: {}
+[7.469052] (safety_controller) JobEnded: {'identifier': 'safety_controller', 'rc': 0}
+[7.479459] (-) TimerEvent: {}
+[7.480229] (state_machine) CommandEnded: {'returncode': 0}
+[7.581566] (-) TimerEvent: {}
+[7.688948] (-) TimerEvent: {}
+[7.791090] (-) TimerEvent: {}
+[7.895141] (-) TimerEvent: {}
+[7.997371] (-) TimerEvent: {}
+[8.077028] (state_machine) JobEnded: {'identifier': 'state_machine', 'rc': 0}
+[8.082323] (-) EventReactorShutdown: {}

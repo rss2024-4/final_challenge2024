@@ -12,7 +12,7 @@ class SafetyController(Node):
     def __init__(self):
         super().__init__('safety_controller')
         self.declare_parameter("scan_topic", "default")
-        self.sim_test = True
+        self.sim_test = False
 
         self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
         self.subscriber = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.scan_callback, 10)
