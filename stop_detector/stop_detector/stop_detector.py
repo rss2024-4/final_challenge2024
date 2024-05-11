@@ -67,7 +67,7 @@ class SignDetector(Node):
                 area = (light_box[2]-light_box[0])*(light_box[3]-light_box[1])
                 self.get_logger().info(f'{area=}')
                 if area > self.light_threshold:
-                    if check_red(image, is_light, light_box):
+                    if not check_green(image, is_light, light_box):
                         self.state = TRAFFIC_STOP
             
         elif self.state == WAITING:
@@ -85,7 +85,7 @@ class SignDetector(Node):
                 self.state = DRIVING
         elif self.state == TRAFFIC_STOP:
             self.get_logger().info('RED LIGHT RED LIGHT')
-            if not check_red(image, is_light, light_box):
+            if check_green(image, is_light, light_box):
                 self.state = DRIVING # maybe should be waiting
 
 
@@ -141,7 +141,7 @@ def read_image(path):
 # Checking if traffic light is red
 
 def crop_to_bounding(img, bounding_box):
-    minx, miny, maxx, maxy = bounding_box
+    minx, miny, maxx, maxy = [int(x) for x in bounding_box]
     return img[miny:maxy, minx:maxx]
 
 # splits image in half horizontally
@@ -155,13 +155,13 @@ def split_img(img):
     return s1, s2
 
 # returns the ratio of red in the img
-def red_percentage(img):
-    red = [255, 0, 0]
-    diff = 10
+def green_percentage(img, node):
+    green = [0, 225, 150]
+    diff = 20
 
     # 'shades' of red to find; loaded in BGR
-    boundaries = [([red[2], red[1], red[0]-diff],
-           [red[2]+diff, red[1]+diff, red[0]])]
+    boundaries = [([green[2], green[1]-diff, green[0]-diff],
+           [green[2]+diff, green[1]+diff, green[0]+diff])]
     
     for (lower, upper) in boundaries:
         lower = np.array(lower, dtype=np.uint8)
@@ -169,17 +169,19 @@ def red_percentage(img):
 
         mask = cv2.inRange(img, lower, upper)
 
-        ratio_red = cv2.countNonZero(mask)/(img.size/3)
+        ratio_green = cv2.countNonZero(mask)/(img.size/3)
 
-        return np.round(ratio_red, 2)
+        greenness = np.round(ratio_green, 2)
+        node.get_logger().info(f"{greenness=}")
+        return greenness
 
-def check_red(img, is_light, light_box):
-    redness_threshold = .75
+def check_green(img, is_light, light_box, node):
+    greenness_threshold = .35
     if is_light:
         cropped = crop_to_bounding(img, light_box)
         top = split_img(cropped)[0]
-        red_perc = red_percentage(top)
-        return red_perc >= redness_threshold
+        green_perc = green_percentage(top, node)
+        return green_perc >= greenness_threshold
     return False
 
 # Detecting Utils
