@@ -21,6 +21,7 @@ class StateMachine(Node):
     def __init__(self):
         super().__init__('state_machine')
         d = "/vesc/low_level/input/navigation"
+        # d = "/drive"
         self.drive_pub = self.create_publisher(AckermannDriveStamped, d, 10) # TODO: change to car drive
 
         self.goal_points_sub = self.create_subscription(PoseArray, "/shell_points", self.goal_points_cb, 1)

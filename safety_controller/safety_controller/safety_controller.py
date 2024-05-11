@@ -14,7 +14,6 @@ class SafetyController(Node):
         self.declare_parameter("scan_topic", "default")
         self.sim_test = False
 
-        self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
         self.subscriber = self.create_subscription(LaserScan, "/scan", self.scan_callback, 10)
         self.drive_output_sub = self.create_subscription(AckermannDriveStamped,
                                                          "/vesc/high_level/ackermann_cmd_mux/output",
@@ -25,7 +24,12 @@ class SafetyController(Node):
 
         if self.sim_test:
             self.subscriber = self.create_subscription(LaserScan,'/scan', self.scan_callback, 10)
-            self.publisher = self.create_publisher(AckermannDriveStamped, '/drive', 10)
+            # self.publisher = self.create_publisher(AckermannDriveStamped, '/drive', 10)
+            self.drive_output_sub = self.create_subscription(AckermannDriveStamped,
+                                                         "/drive",
+                                                         self.handle_drive_msg,
+                                                         10
+                                                         )
             
         self.stop_pub = self.create_publisher(Bool, '/safety_stop', 10)
 
@@ -43,16 +47,16 @@ class SafetyController(Node):
         self.delta_r = 0.3
         self.threshold = 3
         
-        if self.sim_test:
-            self.cur_velocity = 3.5
-            self.cur_angle = -0.1
+        # if self.sim_test:
+        #     self.cur_velocity = 3.5
+        #     self.cur_angle = -0.1
             
-            cmd = AckermannDriveStamped()
-            cmd.header.stamp = self.get_clock().now().to_msg()
-            cmd.header.frame_id = 'map'
-            cmd.drive.steering_angle = self.cur_angle
-            cmd.drive.speed = self.cur_velocity
-            self.publisher.publish(cmd)
+        #     cmd = AckermannDriveStamped()
+        #     cmd.header.stamp = self.get_clock().now().to_msg()
+        #     cmd.header.frame_id = 'map'
+        #     cmd.drive.steering_angle = self.cur_angle
+        #     cmd.drive.speed = self.cur_velocity
+        #     self.publisher.publish(cmd)
     
         self.should_stop = False
 
