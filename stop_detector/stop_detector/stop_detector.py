@@ -11,7 +11,8 @@ from sensor_msgs.msg import Image
 # from detector import StopSignDetector
 # from sift_sign import StopSignSIFT
 
-from ackermann_msgs.msg import AckermannDriveStamped
+# from ackermann_msgs.msg import AckermannDriveStamped
+from std_msgs.msg import Bool
 
 DRIVING = 0
 WAITING = 1
@@ -28,6 +29,7 @@ class SignDetector(Node):
         # self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
         
         self.subscriber = self.create_subscription(Image, "/zed/zed_node/rgb/image_rect_color", self.callback, 5)
+        self.stop_pub = self.create_publisher(Bool, '/stop_detection', 10) # true to stop
         self.timer = self.create_timer(.001, self.timer_cb)
         self.bridge = CvBridge()
 
@@ -41,6 +43,11 @@ class SignDetector(Node):
         self.state = DRIVING
 
         self.start_time = 0
+    
+    def publish_bool(self, shouldStop):
+        cmd = Bool()
+        cmd.data = shouldStop
+        self.stop_pub.publish(cmd)
 
     def timer_cb(self):
         self.get_logger().info(f'{self.state=}')
@@ -53,6 +60,7 @@ class SignDetector(Node):
 
         if self.state == DRIVING:
             self.get_logger().info('vroom vroom')
+            self.publish_bool(False)
 
             if is_sign:
                 self.get_logger().info('SIGN SIGN SIGN')
@@ -61,39 +69,41 @@ class SignDetector(Node):
                 if area > self.sign_threshold:
                     self.state = WAITING
                     self.start_time = self.get_time()
+                    self.publish_bool(True)
             
             elif is_light:
                 self.get_logger().info('LIGHT LIGHT LIGHT')
                 area = (light_box[2]-light_box[0])*(light_box[3]-light_box[1])
                 self.get_logger().info(f'{area=}')
                 if area > self.light_threshold:
-                    if not check_green(image, is_light, light_box, self):
+                    if check_red(image, is_light, light_box, self):
                         self.state = TRAFFIC_STOP
             
         elif self.state == WAITING:
+            self.publish_bool(True)
             self.get_logger().info('WAIT WAIT WAITING')
 
             if(self.get_time() > self.start_time + self.WAITTIME):
                 self.state = GOING_PAST
                 self.start_time = self.get_time()
         
-        # drive past sign/light, ignoring everything and pretending the TAs arent evil
+        # drive past sign/light, ignoring everything and hoping they aren't back to back
         elif self.state == GOING_PAST:
+            self.publish_bool(False)
             # may can just be until not is_sign and not is_light?
             self.get_logger().info('PAST PAST PAST')
             if(self.get_time() > self.start_time + self.WAITTIME):
                 self.state = DRIVING
-        elif self.state == TRAFFIC_STOP:
-            self.get_logger().info('RED LIGHT RED LIGHT')
-            if check_green(image, is_light, light_box, self):
-                self.state = DRIVING # maybe should be waiting
 
+        elif self.state == TRAFFIC_STOP:
+            self.publish_bool(True)
+            self.get_logger().info('RED LIGHT RED LIGHT')
+            if not check_red(image, is_light, light_box, self):
+                self.state = DRIVING # maybe should be waiting
 
         else:
             self.get_logger().info('why are you in the else')
                 
-                
-        
     def get_time(self):
         return self.get_clock().now().to_msg().sec # + (self.get_clock().now().to_msg().nanosec * (10**-9))
 
@@ -155,40 +165,32 @@ def split_img(img):
     return s1, s2
 
 # returns the ratio of red in the img
-def green_percentage(img, node):
-    # green = [0, 225, 150]
-    # diff = 20
+def red_percentage(img, node):
+    red = [255, 0, 0]
+    diff = 15
 
     # 'shades' of red to find; loaded in BGR
-    # boundaries = [([green[2], green[1]-diff, green[0]-diff],
-    #        [green[2]+diff, green[1]+diff, green[0]+diff])]
+    boundaries = [([red[2], red[1], red[0]-diff],
+           [red[2]+diff, red[1]+diff, red[0]])]
     
+    for (lower, upper) in boundaries:
+        lower = np.array(lower, dtype=np.uint8)
+        upper = np.array(upper, dtype=np.uint8)
 
-    
-    # for (lower, upper) in boundaries:
-    #     lower = np.array(lower, dtype=np.uint8)
-    #     upper = np.array(upper, dtype=np.uint8)
+        mask = cv2.inRange(img, lower, upper)
 
-    lower = np.array([60, 85, 0])
-    upper = np.array([90, 255, 255])
+        ratio_red = cv2.countNonZero(mask)/(img.size/3)
+        redness = np.round(ratio_red, 2)
+        node.get_logger().info(f'{redness=}')
+        return redness
 
-    hsvImage = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-    mask = cv2.inRange(hsvImage, lower, upper)
-
-    ratio_green = cv2.countNonZero(mask)/(img.size/3)
-
-    greenness = np.round(ratio_green, 2)
-    node.get_logger().info(f"{greenness=}")
-    return greenness
-
-def check_green(img, is_light, light_box, node):
-    greenness_threshold = .35
+def check_red(img, is_light, light_box, node):
+    redness_threshold = .01
     if is_light:
         cropped = crop_to_bounding(img, light_box)
         top = split_img(cropped)[0]
-        green_perc = green_percentage(top, node)
-        return green_perc >= greenness_threshold
+        red_perc = red_percentage(top, node)
+        return red_perc >= redness_threshold
     return False
 
 # Detecting Utils
