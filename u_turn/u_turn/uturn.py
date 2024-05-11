@@ -13,6 +13,7 @@ class UTurn(Node):
     def __init__(self):
         super().__init__("parking_controller")
         
+        self.done_pub = self.create_publisher(String, "/uturn_is_done", 1)
         self.drive_pub = self.create_publisher(AckermannDriveStamped, "/drive", 1)
         self.create_subscription(Bool, "/safety_stop", self.safety_cb, 1)
         self.create_subscription(String, "/uturn", self.start_cb, 1)
@@ -26,7 +27,10 @@ class UTurn(Node):
         self.backing_up = False
         self.last_safety_msg = False
 
+        self.get_logger().info("Started")
+
     def loop(self):
+        self.get_logger().info(f"{self.state}")
         if self.state == IDLE:
             return 
         elif self.state == TURNING:
@@ -34,6 +38,7 @@ class UTurn(Node):
         elif self.state == BACKING_UP:
             if self.get_time() - self.start_backing_up() < 1.0: 
                 self.drive_pub.publish(self.create_drive_msg(-1.5, -.15))
+            self.done_pub.publish("done")
             self.state = IDLE
 
     def safety_cb(self, msg):
