@@ -16,6 +16,7 @@ from ackermann_msgs.msg import AckermannDriveStamped
 DRIVING = 0
 WAITING = 1
 GOING_PAST = 2
+TRAFFIC_STOP = 3
 
 class SignDetector(Node):
     def __init__(self):
@@ -23,17 +24,18 @@ class SignDetector(Node):
         self.detector = StopSignDetector()
         # self.detector = StopSignSIFT()
 
-        # calling safety rn, may public seperate topic later
-        self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
+        # calling safety rn, may publish seperate topic later
+        # self.publisher = self.create_publisher(AckermannDriveStamped, '/vesc/low_level/input/safety', 10)
         
         self.subscriber = self.create_subscription(Image, "/zed/zed_node/rgb/image_rect_color", self.callback, 5)
         self.timer = self.create_timer(.001, self.timer_cb)
         self.bridge = CvBridge()
 
-        self.get_logger().info("Stop Detector Initialized")
+        self.get_logger().info("Sign & Light Detector Initialized")
 
         # change to tune
-        self.THRESHOLD = 100 # pixels^2
+        self.sign_threshold = 100 # pixels^2
+        self.light_threshold = 100 # pixels^2
         self.WAITTIME = 5 # seconds?
 
         self.state = DRIVING
@@ -44,40 +46,52 @@ class SignDetector(Node):
         self.get_logger().info(f'{self.state=}')
 
     def callback(self, img_msg):
-        try:
-            # Process image with CV Bridge
-            image = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
+        # Process image with CV Bridge
+        image = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
 
-            is_sign, box = self.detector.predict(image)
+        is_sign, sign_box, is_light, light_box = self.detector.predict(image)
 
-            if self.state == DRIVING:
-                self.get_logger().info('vroom vroom')
+        if self.state == DRIVING:
+            self.get_logger().info('vroom vroom')
 
-                if is_sign:
-                    self.get_logger().info('i see the sign')
-
-                    area = (box[2]-box[0])*(box[3]-box[1])
-                    self.get_logger().info(f'{area=}')
-                    if area > self.THRESHOLD:
-                        self.state = WAITING
-                        self.start_time = self.get_time()
-                
-            elif self.state == WAITING:
-                self.get_logger().info('STOP SIGN STOP!')
-
-                if(self.get_time() > self.start_time + self.WAITTIME):
-                    self.state = GOING_PAST
+            if is_sign:
+                self.get_logger().info('SIGN SIGN SIGN')
+                area = (sign_box[2]-sign_box[0])*(sign_box[3]-sign_box[1])
+                self.get_logger().info(f'{area=}')
+                if area > self.sign_threshold:
+                    self.state = WAITING
+                    self.start_time = self.get_time()
             
-            elif self.state == GOING_PAST:
-                # can also just be until not is_sign
-                self.get_logger().info('still vroom vroom')
-                if(self.get_time() > self.start_time + 2*self.WAITTIME):
-                    self.state = DRIVING
-            else:
-                self.get_logger().info('why are you in the else')
+            elif is_light:
+                self.get_logger().info('LIGHT LIGHT LIGHT')
+                area = (light_box[2]-light_box[0])*(light_box[3]-light_box[1])
+                self.get_logger().info(f'{area=}')
+                if area > self.light_threshold:
+                    if check_red(image, is_light, light_box):
+                        self.state = TRAFFIC_STOP
+            
+        elif self.state == WAITING:
+            self.get_logger().info('WAIT WAIT WAITING')
+
+            if(self.get_time() > self.start_time + self.WAITTIME):
+                self.state = GOING_PAST
+                self.start_time = self.get_time()
+        
+        # drive past sign/light, ignoring everything and pretending the TAs arent evil
+        elif self.state == GOING_PAST:
+            # may can just be until not is_sign and not is_light?
+            self.get_logger().info('PAST PAST PAST')
+            if(self.get_time() > self.start_time + self.WAITTIME):
+                self.state = DRIVING
+        elif self.state == TRAFFIC_STOP:
+            self.get_logger().info('RED LIGHT RED LIGHT')
+            if not check_red(image, is_light, light_box):
+                self.state = DRIVING # maybe should be waiting
+
+
+        else:
+            self.get_logger().info('why are you in the else')
                 
-        except:
-            self.get_logger().info('error')
                 
         
     def get_time(self):
@@ -105,8 +119,13 @@ class StopSignDetector:
     results = self.model(img)
     results_df = results.pandas().xyxy[0]
     self.results = results_df
+    is_sign = is_stop_sign(results_df, "stop sign", self.threshold)
+    sign_bb = get_bounding_box(results_df, "stop sign", self.threshold)
+    is_light = is_stop_sign(results_df, "traffic light", self.threshold)
+    light_bb = get_bounding_box(results_df, "traffic light", self.threshold)
 
-    return is_stop_sign(results_df, threshold=self.threshold), get_bounding_box(results_df, threshold=self.threshold)
+
+    return is_sign, sign_bb, is_light, light_bb
 
   def set_threshold(self, new_thresh):
     self.threshold=new_thresh
@@ -119,15 +138,59 @@ def read_image(path):
     rgb_im = cv2.cvtColor(cv2.imread(str(path)), cv2.COLOR_BGR2RGB)
     return rgb_im
 
+# Checking if traffic light is red
+
+def crop_to_bounding(img, bounding_box):
+    minx, miny, maxx, maxy = bounding_box
+    return img[miny:maxy, minx:maxx]
+
+# splits image in half horizontally
+def split_img(img):
+    height = img.shape[0]
+
+    height_cutoff = height // 2
+    s1 = img[:height_cutoff,:]
+    s2 = img[height_cutoff:,:]
+
+    return s1, s2
+
+# returns the ratio of red in the img
+def red_percentage(img):
+    red = [255, 0, 0]
+    diff = 10
+
+    # 'shades' of red to find; loaded in BGR
+    boundaries = [([red[2], red[1], red[0]-diff],
+           [red[2]+diff, red[1]+diff, red[0]])]
+    
+    for (lower, upper) in boundaries:
+        lower = np.array(lower, dtype=np.uint8)
+        upper = np.array(upper, dtype=np.uint8)
+
+        mask = cv2.inRange(img, lower, upper)
+
+        ratio_red = cv2.countNonZero(mask)/(img.size/3)
+
+        return np.round(ratio_red, 2)
+
+def check_red(img, is_light, light_box):
+    redness_threshold = .75
+    if is_light:
+        cropped = crop_to_bounding(img, light_box)
+        top = split_img(cropped)[0]
+        red_perc = red_percentage(top)
+        return red_perc >= redness_threshold
+    return False
+
 # Detecting Utils
 
 THRESHOLD = 0.7
 
-def is_stop_sign(df, label='stop sign', threshold=THRESHOLD):
+def is_stop_sign(df, label, threshold=THRESHOLD):
     confidences = df[df['confidence'] > threshold]
     return len(confidences[confidences['name'] == label]) != 0 # If a stop sign has been detected
 
-def get_bounding_box(df, label='stop sign', threshold=THRESHOLD):
+def get_bounding_box(df, label, threshold=THRESHOLD):
     if not is_stop_sign(df, label=label, threshold=threshold): return (0, 0, 0, 0)
     confidences = df[df['confidence'] > threshold]
     stop_sign = confidences[confidences['name'] == label].head(1)

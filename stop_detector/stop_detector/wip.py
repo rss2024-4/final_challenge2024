@@ -178,20 +178,20 @@ def main(args=None):
     rclpy.shutdown()
 
 if __name__=="__main__":
-    # main()
+    main()
 
-    detector = StopSignDetector()
+    # detector = StopSignDetector()
     
-    img = read_image('test_images/red_light.jpg')
-    cv2.imshow("og", img)
+    # img = read_image('test_images/red_light.jpg')
+    # cv2.imshow("og", img)
 
-    is_light, bb = detector.predict(img)
+    # is_light, bb = detector.predict(img)
 
-    cropped = crop_to_bounding()
-    cv2.imshow("cropped", cropped)
+    # cropped = crop_to_bounding()
+    # cv2.imshow("cropped", cropped)
 
-    split = split_img(cropped)[0]
-    cv2.imshow("top half", split)
+    # split = split_img(cropped)[0]
+    # cv2.imshow("top half", split)
 
-    percentage = check_red(split)
-    print(percentage)
+    # percentage = check_red(split)
+    # print(percentage)
